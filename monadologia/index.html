@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Monadologia</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> 
+	<link type="text/css" rel="stylesheet" href="core/css/global.css" />
+	<script type="text/javascript" src="lib/jquery-3.1.1.min.js"></script>
+	<!-- script type="text/javascript" src="modulos/estado_inicial.js"></script-->
+	<script type="text/javascript" src="core/interface.js"></script>
+	<script type="text/javascript" src="core/monadologia.js"></script>
+	<script type="text/javascript" src="modulos/mundo.js"></script>
+	<script type="text/javascript" src="modulos/celula.js"></script>
+	
+</head>
+
+<body>
+	<main>
+		<div id="game">
+			<div id="game_info">
+				
+				<!-- label>Mônadas:</label> <span id="celulas"></span-->
+				
+				<input type="file" id="file_estado_inicial" value="Escolher estado inicial" />
+				<label>Tamanho:</label>
+				<select id="sel_height">
+					<option value="100">Linhas: 100</option>
+					<option value="50" selected="selected">Linhas: 50</option>
+					<option value="25" >Linhas: 25</option>
+				</select> x 
+				<select id="sel_width">
+					<option value="100">Colunas: 100</option>
+					<option value="50" selected="selected">Colunas: 50</option>
+					<option value="25" >Colunas: 25</option>
+				</select>
+				<select id="celula">
+					<option value="celula">modulo/celula.js</option>
+					<option value="escolher">escolher arquivo...</option>
+				</select>
+				<select id="estado_inicial">
+					<option value="modulos/estado_inicial.js">modulo/estado_inicial.js</option>
+					<option value="modulos/glider.js">modulo/glider.js</option>
+					<option value="escolher">escolher arquivo...</option>
+				</select>
+				<input type="button" value="carregar" id="carregar" />
+			</div>
+			<canvas id="game_grid"></canvas>
+			<div id="game_control">
+				<label>Gerações:</label> <span id="geracoes"></span>
+				<a href="#" id="iniciar">>iniciar</a>
+				<a href="#" id="proximo">>próximo</a>
+				<label>Velocidade:</label><select id="velocidade">
+					<option value="1">0.001s</option>
+					<option value="10">0.01s</option>
+					<option value="100" selected="selected">0.1s</option>
+					<option value="500">0.5s</option>
+					<option value="1000">1s</option>
+				</select>
+				<label>Zoom:</label><select id="zoom">
+					<option value="0.25">25%</option>
+					<option value="0.5">50%</option>
+					<option value="1" selected="selected">100%</option>
+				</select>
+			</div>
+		</div>
+	
+	</main>
+	<script type="text/javascript">
+		
+	var ui = new UI();
+	
+	var btProximo = document.getElementById('proximo');
+	btProximo.addEventListener('click',function(){ui.proximoPasso.call(ui);},false);
+	var btIniciar = document.getElementById('iniciar');
+	btIniciar.addEventListener('click',function(){ui.iniciar.call(ui);},false);
+	
+	ui.carregar();
+	
+	
+	</script>
+	<script type="text/javascript" id="script_estado_inicial"></script>
+	<script type="text/javascript" id="script_celula"></script>
+
+
+</body>
+</html>
+
+
