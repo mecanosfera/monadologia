@@ -93,3 +93,24 @@ var MaiorOuIgual2 = 3>=2;
 var MenorOuIgual1 = 2<=2;
 var MenorOuIgual2 = 3<=2;
 
+
+
+//OPERADORES LÓGICOS
+
+
+var E1 = true  && true;
+var E2 = true  && false;
+var E3 = false && true;
+var E4 = false && false;
+
+var OU1 = true  || true;
+var OU2 = true  || false;
+var OU3 = false || true;
+var OU4 = false || false;
+
+
+
+
+
+
+

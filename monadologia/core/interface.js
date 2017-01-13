@@ -3,17 +3,17 @@ class UI{
 	
 	constructor(){	
 		
-		
+		var self = this;
 		this.executando = false;	
 		this.indGeracoes = $('#geracoes');
 		//this.indCelulas = document.getElementById('celulas');
 		this.setLoader('estado_inicial');
 		this.setLoader('celula');
 		this.loaded = false;
+		this.setTamanho();
 		$('#carregar').click(this.carregar);
-		
-		//this.carregar();
-		//$('#proximo').click(function(){this.proximo()});
+		$('#sel_height').change(function(){self.setTamanho.call(self);});
+		$('#sel_width').change(function(){self.setTamanho.call(self);});
 		
 	}
 	
@@ -81,6 +81,10 @@ class UI{
 		$('body').append('<script type="text/javascript" id="script_estado_inicial" src="'+$('#estado_inicial').val()+'"><\/script>');
 		
 		
+	}
+	
+	setTamanho(){
+		this.tamanho = [parseInt($('#sel_height').val()),parseInt($('#sel_width').val())];
 	}
 	
 	setZoom(){
