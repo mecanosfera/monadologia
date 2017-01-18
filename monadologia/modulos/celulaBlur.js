@@ -53,6 +53,16 @@ class Celula {
 		var g = 0;
 		var b = 0;
 		
+		/*if(this.estado.length==6){
+			r += parseInt('0x'+this.estado[0]+this.estado[1]);
+			g += parseInt('0x'+this.estado[2]+this.estado[3]);
+			b += parseInt('0x'+this.estado[4]+this.estado[5]);
+		} else if (this.estado.length==3){
+			r += parseInt('0x'+this.estado[0]);
+			g += parseInt('0x'+this.estado[1]);
+			b += parseInt('0x'+this.estado[2]);
+		}*/
+		
 		
 		var totalVizinhos = 0;
 		for(var i=0;i<this.zonaClara.length;i++){
