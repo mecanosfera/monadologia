@@ -61,6 +61,7 @@ class UI{
 		var self = this;
 		this.parar();
 		this.corIgualEstado = corIgualEstado;
+		//alert(this.corIgualEstado);
 		this.cores = cores;
 		this.estadoInicial = estadoInicial;
 		this.monadologia = new Monadologia(this,[parseInt($('#sel_height').val()),parseInt($('#sel_width').val())],this.estadoInicial);
@@ -73,6 +74,7 @@ class UI{
 		$('#zoom').change(function(){self.setZoom.call(self)});
 		$('#velocidade').change(function(){self.velocidade = parseInt($(this).val())});
 	}
+	
 	
 	carregar(){
 		$('#script_estado_inicial').remove();
@@ -174,7 +176,6 @@ class Grid {
 		this.zoom = ui.zoom;
 		this.canvas = document.getElementById('game_grid');
 		this.canvas.width = parseInt(this.ui.monadologia.tamanho[1]*10*this.zoom);
-		//alert(this.canvas.width);
 		this.canvas.height = parseInt(this.ui.monadologia.tamanho[0]*10*this.zoom);
 		this.cxt = this.canvas.getContext('2d');
 		this.tamanhoCelula = parseInt(10*this.zoom);
@@ -183,11 +184,10 @@ class Grid {
 	
 	
 	draw(estados){
-		//alert(estados.length);
+			
 		for(var i=0;i<estados.length;i++){
-			//this.cxt.fillStyle=getColor(estados[i].estado);
-			if(this.corIgualEstado){
-				this.cxt.fillStyle = '';
+			if(this.ui.corIgualEstado){
+				this.cxt.fillStyle = '#'+estados[i].estado;
 			} else {
 				this.cxt.fillStyle= this.ui.cores[estados[i].estado];
 			}

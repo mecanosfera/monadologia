@@ -17,7 +17,7 @@ class Celula {
 		if(estado!=null){
 			this.estado = estado;
 		} else {
-			this.estado = 0;
+			this.estado = '000000';
 		}
 		this.proximoEstado = this.estado;
 	}
@@ -49,18 +49,27 @@ class Celula {
 		if(this.zonaClara==null){
 			this.setZonaClara();
 		}
+		var r = 0;
+		var g = 0;
+		var b = 0;
+		
+		
 		var totalVizinhos = 0;
 		for(var i=0;i<this.zonaClara.length;i++){
-			totalVizinhos += this.zonaClara[i].estado;
+			var zc = this.zonaClara[i].estado;
+			if(zc.length==6){
+				r += parseInt('0x'+zc[0]+zc[1]);
+				g += parseInt('0x'+zc[2]+zc[3]);
+				b += parseInt('0x'+zc[4]+zc[5]);
+			} else if (zc.length==3){
+				r += parseInt('0x'+zc[0]);
+				g += parseInt('0x'+zc[1]);
+				b += parseInt('0x'+zc[2]);
+			}
 		}
-		if(this.estado==1 && (totalVizinhos<2 || totalVizinhos>3)){
-			this.proximoEstado=0;
-			return this;
-		} else if (this.estado==0 && totalVizinhos==3){
-			this.proximoEstado=1;
-			return this;
-		}
-		return null;
+		
+		this.proximoEstado = parseInt(r/8).toString(16)+parseInt(g/8).toString(16)+parseInt(b/8).toString(16);
+		return this;
 	}
 	
 }

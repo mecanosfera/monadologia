@@ -1,3 +1,5 @@
+//estado inicial
+
 var corIgualEstado = false;
 
 var cores = {
