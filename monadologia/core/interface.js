@@ -189,7 +189,11 @@ class Grid {
 			if(this.ui.corIgualEstado){
 				this.cxt.fillStyle = '#'+estados[i].estado;
 			} else {
-				this.cxt.fillStyle= this.ui.cores[estados[i].estado];
+				if(this.ui.cores[estados[i].estado]!=null){
+					this.cxt.fillStyle = this.ui.cores[estados[i].estado];
+				} else {
+					this.cxt.fillStyle = this.ui.cores[0];
+				}
 			}
 			this.cxt.strokeStyle='#cccccc';
 			this.cxt.fillRect(estados[i].posicao[1]*this.tamanhoCelula,estados[i].posicao[0]*this.tamanhoCelula,this.tamanhoCelula,this.tamanhoCelula);
