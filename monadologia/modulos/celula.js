@@ -9,10 +9,20 @@ class Celula {
 	 * ao seu mundo e estado inicial. A posição inicial é definida ao ser
 	 * adicionada ao mundo. Se o estado não for definido começa com zero.
 	 */
-	constructor(monadologia,mundo,estado){
+	constructor(monadologia,estado,posicao){
+		this.init(monadologia,estado,posicao)
+	}
+	
+	init(monadologia,estado,posicao){
 		this.monadologia = monadologia;
-		this.mundo = mundo;
-		this.posicao = this.mundo.addCelula(this);
+		this.mundo = monadologia.mundo;
+		this.posicao = null;
+		if(posicao!=null){
+			this.posicao = posicao;
+			this.mundo.addCelula(this);
+		} else {
+			this.posicao = this.mundo.addCelula(this);
+		}
 		this.zonaClara = null;
 		if(estado!=null){
 			this.estado = estado;
@@ -64,3 +74,116 @@ class Celula {
 	}
 	
 }
+
+
+class CelulaImortal extends Celula{
+	
+	
+	init(monadologia,estado,posicao){
+		super.init(monadologia,estado,posicao);
+		this.estado=3;
+	}
+	
+	perceber(){
+		return null;
+	}
+	
+}
+
+class CelulaDoidona extends Celula{
+	
+	
+	init(monadologia,estado,posicao){
+		super.init(monadologia,estado,posicao);
+		if(this.estado==0){
+			this.estado = 1;
+		} else {
+			this.estado = 2;
+		}
+	}
+	
+	
+	perceber(){
+		if(this.zonaClara==null){
+			this.setZonaClara();
+		}
+		var totalVizinhos = 0;
+		for(var i=0;i<this.zonaClara.length;i++){
+			totalVizinhos += this.zonaClara[i].estado;
+		}
+		if(this.estado==2 && (totalVizinhos<2 || totalVizinhos>3)){
+			this.proximoEstado=1;
+			return this;
+		} else if (this.estado==1 && totalVizinhos==3){
+			this.proximoEstado=2;
+			return this;
+		}
+		return null;
+	}
+}
+
+class Glider {
+	
+	constructor(propriedades){
+		this.init(propriedades)
+	}
+	
+	init(propriedades){
+		if(typeof propriedades[0] === 'function'){
+			this.tipoCelula = propriedades[0];
+			this.linha = propriedades[1];
+			this.coluna = propriedades[2];
+			this.estado = propriedades[3];
+		} else {
+			this.tipoCelula = null;
+			this.linha = propriedades[0];
+			this.coluna = propriedades[1];
+			this.estado = propriedades[2];
+		}
+		this.setEstado();
+	}
+	
+	setEstado(){
+		if(this.estado==0){
+			this.coordenadas = [
+				[this.linha+0,this.coluna+1,1],
+				[this.linha+1,this.coluna+2,1],
+				[this.linha+2,this.coluna+0,1],[this.linha+2,this.coluna+1,1],[this.linha+2,this.coluna+2,1]
+			];
+		} else if (this.estado==1){
+			this.coordenadas = [
+				[this.linha+0,this.coluna+0,1],[this.linha+0,this.coluna+2,1],
+				[this.linha+1,this.coluna+1,1],[this.linha+1,this.coluna+2,1],
+				[this.linha+2,this.coluna+1,1]
+			];
+		} else if (this.estado==2){
+			this.coordenadas = [
+				[this.linha+0,this.coluna+2,1],
+				[this.linha+1,this.coluna+0,1],[this.linha+1,this.coluna+2,1],
+				[this.linha+2,this.coluna+1,1],[this.linha+2,this.coluna+2,1]
+			];
+		} else {
+			this.coordenadas = [
+				[this.linha+0,this.coluna+0,1],
+				[this.linha+1,this.coluna+1,1],[this.linha+1,this.coluna+2,1],
+				[this.linha+2,this.coluna+0,1],[this.linha+2,this.coluna+1,1]
+			];
+		}
+	}
+	
+	append(estados){
+		if(this.tipoCelula==null){
+			for(var i=0;i<this.coordenadas.length;i++){
+				estados.push(this.coordenadas[i]);
+			}
+		} else {
+			for(var i=0;i<this.coordenadas.length;i++){
+				estados.push([this.tipoCelula,this.coordenadas[i][0],this.coordenadas[i][1],this.coordenadas[i][2]]);
+			}
+		}
+	}
+	
+}
+
+
+

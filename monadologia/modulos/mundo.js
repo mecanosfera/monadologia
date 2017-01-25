@@ -27,23 +27,27 @@ class Mundo {
 	
 	
 	addCelula(celula){
-		if(this.ultimaCelula==null){
-			this.celulas[0][0] = celula;
-			this.ultimaCelula = [0,0];
-			return [0,0];
+		if(celula.posicao!=null){
+			this.celulas[celula.posicao[0]][celula.posicao[1]] = celula;
 		} else {
-			if(this.ultimaCelula[0]==(this.tamanho[0]-1) && this.ultimaCelula[1]==(this.tamanho[1]-1)){
-				//console.log()
-				this.monadologia.erro(ERR_LIMITE_MONADA);
-				return null;
-			} else if(this.ultimaCelula[0]==(this.tamanho[0]-1)){
-				this.ultimaCelula = [0,this.ultimaCelula[1]+1];
-				this.celulas[0][this.ultimaCelula[1]] = celula;
-				return [this.ultimaCelula[0],this.ultimaCelula[1]];
+			if(this.ultimaCelula==null){
+				this.celulas[0][0] = celula;
+				this.ultimaCelula = [0,0];
+				return [0,0];
 			} else {
-				this.ultimaCelula[0]=this.ultimaCelula[0]+1;
-				this.celulas[this.ultimaCelula[0]][this.ultimaCelula[1]] = celula;
-				return [this.ultimaCelula[0],this.ultimaCelula[1]];
+				if(this.ultimaCelula[0]==(this.tamanho[0]-1) && this.ultimaCelula[1]==(this.tamanho[1]-1)){
+					//console.log()
+					this.monadologia.erro(ERR_LIMITE_MONADA);
+					return null;
+				} else if(this.ultimaCelula[0]==(this.tamanho[0]-1)){
+					this.ultimaCelula = [0,this.ultimaCelula[1]+1];
+					this.celulas[0][this.ultimaCelula[1]] = celula;
+					return [this.ultimaCelula[0],this.ultimaCelula[1]];
+				} else {
+					this.ultimaCelula[0]=this.ultimaCelula[0]+1;
+					this.celulas[this.ultimaCelula[0]][this.ultimaCelula[1]] = celula;
+					return [this.ultimaCelula[0],this.ultimaCelula[1]];
+				}
 			}
 		}
 	}

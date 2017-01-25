@@ -105,3 +105,6 @@ body{
 	font-weight: bold;	
 }
 
+#celula,#estado_inicial{
+	display: none;
+}

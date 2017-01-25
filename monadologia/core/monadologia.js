@@ -12,21 +12,28 @@ class Monadologia {
 		this.mundo = new Mundo(this,tamanho);
 		this.inicializarCelulas();
 		this.setEstadoInicialCelulas(estadoInicial);
+		this.estado = this.getEstados();
 		this.geracao = 0;
 	}
 	
 	inicializarCelulas(){
 		for(var i=0;i<this.tamanho[0];i++){
 			for(var j=0;j<this.tamanho[1];j++){
-				this.estado.push(new Celula(this,this.mundo));
+				new Celula(this);
 			}
-		}	
+		}
 	}
 	
 	setEstadoInicialCelulas(estadoInicial){
 		if(estadoInicial!=null){
 			for(var e of estadoInicial){
-				if(e[0]<this.tamanho[0] && e[1]<this.tamanho[1]){
+				if(typeof e[0]==='function'){
+					if(e[1]<this.tamanho[0] && e[2]<this.tamanho[1]){
+						new e[0](this,e[3],[e[1],e[2]]);
+					} else {
+						console.log('Célula com posição inválida: ['+e[1]+','+e[2]+'].');
+					}
+				} else if(e[0]<this.tamanho[0] && e[1]<this.tamanho[1]){
 					this.mundo.celulas[e[0]][e[1]].estado = e[2];
 				} else {
 					console.log('Célula com posição inválida: ['+e[0]+','+e[1]+'].');

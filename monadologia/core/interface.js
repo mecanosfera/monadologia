@@ -78,8 +78,8 @@ class UI{
 	
 	carregar(){
 		$('#script_estado_inicial').remove();
-		$('#script_celula').remove();
-		$('body').append('<script type="text/javascript" id="script_celula" src="'+$('#celula').val()+'"><\/script>');
+		//$('#script_celula').remove();
+		//$('body').append('<script type="text/javascript" id="script_celula" src="'+$('#celula').val()+'"><\/script>');
 		$('body').append('<script type="text/javascript" id="script_estado_inicial" src="'+$('#estado_inicial').val()+'"><\/script>');
 		
 		
