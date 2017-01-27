@@ -64,7 +64,7 @@ class Monadologia {
 			}
 		}
 		for(var celula of this.estado){
-			celula.estado = celula.proximoEstado;
+			celula.setProximoEstado();
 		}
 		this.geracao += 1;
 		return this.estado;

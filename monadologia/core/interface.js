@@ -184,7 +184,6 @@ class Grid {
 	
 	
 	draw(estados){
-			
 		for(var i=0;i<estados.length;i++){
 			if(this.ui.corIgualEstado){
 				this.cxt.fillStyle = '#'+estados[i].estado;
@@ -196,6 +195,15 @@ class Grid {
 				}
 			}
 			this.cxt.strokeStyle='#cccccc';
+			if(estados[i] instanceof CelulaServa){
+				this.cxt.strokeStyle='#0000ff';
+			} else if (estados[i] instanceof CelulaCerebro){
+				if(estados[i].estado==1){
+					this.cxt.fillStyle='#ff0000';
+				} else {
+					this.cxt.fillStyle='#ccc';
+				}
+			}
 			this.cxt.fillRect(estados[i].posicao[1]*this.tamanhoCelula,estados[i].posicao[0]*this.tamanhoCelula,this.tamanhoCelula,this.tamanhoCelula);
 			this.cxt.strokeRect((estados[i].posicao[1]*this.tamanhoCelula),(estados[i].posicao[0]*this.tamanhoCelula),this.tamanhoCelula,this.tamanhoCelula);
 

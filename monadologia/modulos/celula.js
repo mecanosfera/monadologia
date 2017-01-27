@@ -73,6 +73,10 @@ class Celula {
 		return null;
 	}
 	
+	setProximoEstado(){
+		this.estado = this.proximoEstado;
+	}
+	
 }
 
 
@@ -121,6 +125,7 @@ class CelulaDoidona extends Celula{
 		return null;
 	}
 }
+
 
 
 

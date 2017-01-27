@@ -26,10 +26,10 @@ for(var i=0;i<colunas;i++){
 
 
 
-var glider1 = new GliderBasico([1,3,1]);
+var glider1 = new GliderCerebral([1,3,1]);
 glider1.append(estadoInicial);
 
-var gliderDoidao = new Glider([CelulaDoidona,10,11,0]);
-gliderDoidao.append(estadoInicial);
+/*var gliderDoidao = new Glider([CelulaDoidona,10,11,0]);
+gliderDoidao.append(estadoInicial);*/
 
 ui.update(corIgualEstado,cores,estadoInicial);

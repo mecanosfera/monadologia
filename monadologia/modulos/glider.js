@@ -82,3 +82,49 @@ class Glider extends GliderBasico{
 	}
 	
 }
+
+class GliderCerebral extends Glider{
+	
+	init(propriedades){
+		super.init(propriedades);
+		this.tipoCelula = CelulaServa;
+	}
+	
+	append(estados){
+		var linhaC = this.linha;
+		var colunaC = this.coluna;
+		if(this.estado==0){
+			linhaC += 1;
+			estados.push([CelulaCerebro,linhaC,colunaC,0]);
+		} else if (this.estado==2){
+			linhaC += 1;
+			colunaC -= 1;
+			estados.push([CelulaCerebro,linhaC,colunaC,0]);
+		} else if (this.estado==1){
+			linhaC += 1;
+			colunaC += 1;
+		} else if (this.estado==4){
+			linhaC += 1;
+			colunaC += 1;
+		}
+		
+		
+		
+		for(var i=-1;i<2;i++){
+			for(var j=-1;j<2;j++){
+				if(!(i==0 && j==0)){	
+					estados.push([CelulaServa,linhaC+i,colunaC+j,0]);
+				}
+			}
+		}
+		for(var i=0;i<this.coordenadas.length;i++){
+			if((this.estado==1 && i==2) || (this.estado==3 && i==1)){
+				estados.push([CelulaCerebro,this.coordenadas[i][0],this.coordenadas[i][1],this.coordenadas[i][2]]);
+			} else {
+				estados.push([CelulaServa,this.coordenadas[i][0],this.coordenadas[i][1],this.coordenadas[i][2]]);
+			}
+		}
+	}
+	
+	
+}
