@@ -1,35 +1,29 @@
-//estado inicial
-
 var corIgualEstado = false;
 
 var cores = {
-		0: '#ffffff',
-		1: '#000000',
-		2: '#ff0000',
-		3: '#ffff00',
-		4: '#f0f0f0',
-		5: '#cf0fff'
-}
-
-var linhas = ui.tamanho[0];
-var colunas = ui.tamanho[1];
-
-
-var estadoInicial = [
-	[35,10,1],[35,11,1],[35,12,1],[35,13,1],[35,14,1],[35,15,1],[35,16,1],[35,17,1],[35,18,1],[35,19,1],[35,20,1],[35,21,1],[35,22,1],[35,23,1],[35,24,1],[35,25,1],[35,26,1],
-	[CelulaImortal,90,26,1]
-];
-
-for(var i=0;i<colunas;i++){
-	estadoInicial.push([CelulaDoidona,37,i,1]);
+		'0': '#ffffff',
+		'1': '#000000',
+		'2': '#00ff00',
+		'3': '#999999',
+		'4': '#ff0000',
+		'5': '#0000ff'
 }
 
 
 
-var glider1 = new GliderCerebral([1,3,1]);
-glider1.append(estadoInicial);
+var linha = parseInt(ui.tamanho[0]);
+var coluna = parseInt(ui.tamanho[1]);
 
-/*var gliderDoidao = new Glider([CelulaDoidona,10,11,0]);
-gliderDoidao.append(estadoInicial);*/
 
-ui.update(corIgualEstado,cores,estadoInicial);
+var estadoInicial = [];
+
+estadoInicial.push([10,10,'5........01:4-0:4-1:4']);
+
+for(var c=0;c<coluna;c++){
+	estadoInicial.push([37,c,'1']);
+}
+
+
+
+
+ui.update(corIgualEstado,cores,estadoInicial,CelulaEnativa);

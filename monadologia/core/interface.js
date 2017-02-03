@@ -57,14 +57,14 @@ class UI{
 		});
 	}
 	
-	update(corIgualEstado,cores,estadoInicial){
+	update(corIgualEstado,cores,estadoInicial,classeCelula){
 		var self = this;
 		this.parar();
 		this.corIgualEstado = corIgualEstado;
 		//alert(this.corIgualEstado);
 		this.cores = cores;
 		this.estadoInicial = estadoInicial;
-		this.monadologia = new Monadologia(this,[parseInt($('#sel_height').val()),parseInt($('#sel_width').val())],this.estadoInicial);
+		this.monadologia = new Monadologia(this,[parseInt($('#sel_height').val()),parseInt($('#sel_width').val())],this.estadoInicial,classeCelula);
 		this.velocidade = parseInt($('#velocidade').val());
 		this.zoom = parseFloat($('#zoom').val());
 		this.grid = new Grid(this);
@@ -73,6 +73,23 @@ class UI{
 		this.indGeracoes.text(0);
 		$('#zoom').change(function(){self.setZoom.call(self)});
 		$('#velocidade').change(function(){self.velocidade = parseInt($(this).val())});
+		document.getElementById('game_grid').addEventListener('mousemove',function(event){
+			//alert(self.zoom);
+			if(event.offsetX>-1 && event.offsetX<=this.width && event.offsetY>-1 && event.offsetY<this.height){
+				var celula = self.monadologia.mundo.celulas[parseInt(event.offsetX/(10*self.zoom))][parseInt(event.offsetY/(10*self.zoom))];
+				var regras = '<pre>{\n';
+				for(let e in celula.regras){
+					regras += '   '+e+':{\n';
+					for(let p in celula.regras[e]){
+						regras+= '      '+p+':'+celula.regras[e][p]+'\n'
+					}
+					regras +='   }\n';
+				}
+				regras +='}</pre>';
+				
+				document.getElementById('celula_info').innerHTML = '<p>'+celula.posicao+'<br/><strong>estado:</strong> '+celula.estado+'</p><p>'+regras+'</p>';
+			}
+		},false);
 	}
 	
 	
@@ -188,11 +205,21 @@ class Grid {
 			if(this.ui.corIgualEstado){
 				this.cxt.fillStyle = '#'+estados[i].estado;
 			} else {
-				if(this.ui.cores[estados[i].estado]!=null){
-					this.cxt.fillStyle = this.ui.cores[estados[i].estado];
+				
+				if(typeof estados[i].estado==='string'){
+					if(this.ui.cores[estados[i].estado[0]]!=null){
+						this.cxt.fillStyle = this.ui.cores[estados[i].estado[0]];
+					} else {
+						this.cxt.fillStyle = this.ui.cores[0];
+					}
 				} else {
-					this.cxt.fillStyle = this.ui.cores[0];
+					if(this.ui.cores[estados[i].estado]!=null){
+						this.cxt.fillStyle = this.ui.cores[estados[i].estado];
+					}else{
+						this.cxt.fillStyle = this.ui.cores[0];
+					}
 				}
+		
 			}
 			this.cxt.strokeStyle='#cccccc';
 			if(estados[i] instanceof CelulaServa){

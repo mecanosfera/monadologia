@@ -13,6 +13,7 @@
 	<script type="text/javascript" src="modulos/mundo.js"></script>
 	<script type="text/javascript" src="modulos/celula.js"></script>
 	<script type="text/javascript" src="modulos/celula_cognitivista.js"></script>
+	<script type="text/javascript" src="modulos/celula_enativa.js"></script>
 	<script type="text/javascript" src="modulos/glider.js"></script>
 	
 </head>
@@ -27,13 +28,13 @@
 				<input type="file" id="file_estado_inicial" value="Escolher estado inicial" />
 				<label>Tamanho:</label>
 				<select id="sel_height">
-					<option value="100" selected="selected">Linhas: 100</option>
-					<option value="50" >Linhas: 50</option>
+					<option value="100">Linhas: 100</option>
+					<option value="50" selected="selected">Linhas: 50</option>
 					<option value="25" >Linhas: 25</option>
 				</select> x 
 				<select id="sel_width">
-					<option value="100" selected="selected">Colunas: 100</option>
-					<option value="50" >Colunas: 50</option>
+					<option value="100">Colunas: 100</option>
+					<option value="50" selected="selected">Colunas: 50</option>
 					<option value="25" >Colunas: 25</option>
 				</select>
 				<select id="celula">
@@ -47,7 +48,10 @@
 				</select>
 				<input type="button" value="carregar" id="carregar" />
 			</div>
-			<canvas id="game_grid"></canvas>
+			<div id ='area_canvas'>
+				<canvas id="game_grid"></canvas>
+				<div id="celula_info"></div>
+			</div>
 			<div id="game_control">
 				<label>Gerações:</label> <span id="geracoes"></span>
 				<a href="#" id="iniciar">>iniciar</a>
@@ -61,8 +65,8 @@
 				</select>
 				<label>Zoom:</label><select id="zoom">
 					<option value="0.25">25%</option>
-					<option value="0.5" selected="selected">50%</option>
-					<option value="1" >100%</option>
+					<option value="0.5">50%</option>
+					<option value="1"  selected="selected">100%</option>
 				</select>
 			</div>
 		</div>

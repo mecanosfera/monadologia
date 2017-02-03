@@ -108,3 +108,15 @@ body{
 #celula,#estado_inicial{
 	display: none;
 }
+#celula_info{
+	border: 1px solid #000;
+	width: 300px;
+	height: 500px;
+	position: absolute;
+	top: 0px;
+	right: 0;
+}
+
+#area_canvas{
+	position: relative;
+}

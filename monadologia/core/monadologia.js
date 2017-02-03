@@ -3,23 +3,28 @@ const ERR_LIMITE_MONADA = 0; //mônada fora do limite
 
 class Monadologia {
 	
-	constructor(ui,tamanho,estadoInicial){
+	constructor(ui,tamanho,estadoInicial,classeCelula){
 		this.ui = ui;
 		this.geracao = 0;
 		this.celulasAtivas = 0;
 		this.estado = [];
 		this.tamanho = tamanho;
 		this.mundo = new Mundo(this,tamanho);
+		this.classeCelula = Celula;
+		if(classeCelula!=null){
+			this.classeCelula = classeCelula;
+		}
 		this.inicializarCelulas();
 		this.setEstadoInicialCelulas(estadoInicial);
 		this.estado = this.getEstados();
 		this.geracao = 0;
+		
 	}
 	
 	inicializarCelulas(){
 		for(var i=0;i<this.tamanho[0];i++){
 			for(var j=0;j<this.tamanho[1];j++){
-				new Celula(this);
+				new this.classeCelula(this);
 			}
 		}
 	}
