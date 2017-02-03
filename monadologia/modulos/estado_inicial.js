@@ -17,7 +17,7 @@ var coluna = parseInt(ui.tamanho[1]);
 
 var estadoInicial = [];
 
-estadoInicial.push([10,10,'5........01:4-0:4-1:4']);
+estadoInicial.push([10,10,'5........01:4-0:4-1:4|']);
 
 for(var c=0;c<coluna;c++){
 	estadoInicial.push([37,c,'1']);

@@ -40,7 +40,14 @@ class CelulaEnativa extends Celula{
 		var dna = '';
 		for(var i=0;i<this.zonaClara.length;i++){
 			var v = this.zonaClara[i];
-			dna+= v.estado;
+			for(var j=0;j<v.estado.length;j++){
+				if(v.estado[j]!='|'){
+					dna+= v.estado[j];
+				} else {
+					return dna;
+				}
+			}
+			
 		}
 		return dna;
 	}
@@ -87,7 +94,19 @@ class CelulaEnativa extends Celula{
 				c++;
 			}
 			c++;
-			var novoEstado = regra[c];
+			var novoEstado = '';
+			for(var n=c;n<regra.length;n++){
+				if(regra[n]==','){
+					novoEstado+='.';
+				} else if(regra[n]=='+'){
+					novoEstado+='-';
+				} else if(regra[n]=='*'){
+					novoEstado+= '|';
+				} else if(regra[n]!='|'){
+					novoEstado+= regra[n];
+				}
+			}
+			
 			if(this.regras[estado]===undefined){
 				this.regras[estado] = {qtde:novoEstado};
 			} else {

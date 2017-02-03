@@ -87,7 +87,7 @@ class UI{
 				}
 				regras +='}</pre>';
 				
-				document.getElementById('celula_info').innerHTML = '<p>'+celula.posicao+'<br/><strong>estado:</strong> '+celula.estado+'</p><p>'+regras+'</p>';
+				document.getElementById('celula_info').innerHTML = '<p>'+celula.posicao+'<br/><strong>estado:</strong> '+celula.estado+'<br/><strong>dna:</strong>'+celula.calcularDNA()+'</p><p>'+regras+'</p>';
 			}
 		},false);
 	}
