@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Monadologia</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet"> 
+	<link type="text/css" rel="stylesheet" href="core/css/global.css" />
+	<script type="text/javascript" src="lib/jquery-3.1.1.min.js"></script>
+	<!-- script type="text/javascript" src="modulos/estado_inicial.js"></script-->
+	<script type="text/javascript" src="core/interface.js"></script>
+	<script type="text/javascript" src="core/monadologia.js"></script>
+	<script type="text/javascript" src="modulos/mundo.js"></script>
+	<!-- script type="text/javascript" src="modulos/celula.js"></script-->
+	
+</head>
+
+<body>
+	<main>
+		<div id="game">
+			<div id="game_info">
+				
+				<!-- label>Mônadas:</label> <span id="celulas"></span-->
+				
+				<input type="file" id="file_estado_inicial" value="Escolher estado inicial" />
+				<label>Tamanho:</label>
+				<select id="sel_height">
+					<option value="100" selected="selected">Linhas: 100</option>
+					<option value="50" >Linhas: 50</option>
+					<option value="25" >Linhas: 25</option>
+				</select> x 
+				<select id="sel_width">
+					<option value="100" selected="selected">Colunas: 100</option>
+					<option value="50" >Colunas: 50</option>
+					<option value="25" >Colunas: 25</option>
+				</select>
+				<select id="celula">
+					<option value="modulos/celulaBlur.js" selected="selected">modulo/celulaBlur.js</option>
+					<option value="escolher">escolher arquivo...</option>
+				</select>
+				<select id="estado_inicial">
+					<option value="modulos/pikachu.js" selected="selected">modulo/pikachu.js</option>
+					<option value="escolher">escolher arquivo...</option>
+				</select>
+				<input type="button" value="carregar" id="carregar" />
+			</div>
+			<canvas id="game_grid"></canvas>
+			<div id="game_control">
+				<label>Gerações:</label> <span id="geracoes"></span>
+				<a href="#" id="iniciar">>iniciar</a>
+				<a href="#" id="proximo">>próximo</a>
+				<label>Velocidade:</label><select id="velocidade">
+					<option value="1">0.001s</option>
+					<option value="10">0.01s</option>
+					<option value="100" selected="selected">0.1s</option>
+					<option value="500">0.5s</option>
+					<option value="1000">1s</option>
+				</select>
+				<label>Zoom:</label><select id="zoom">
+					<option value="0.25">25%</option>
+					<option value="0.5" selected="selected">50%</option>
+					<option value="1" >100%</option>
+				</select>
+			</div>
+		</div>
+	
+	</main>
+	<!-- a href="https://github.com/mecanosfera/monadologia" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a-->
+	<script type="text/javascript">
+		
+		var ui = new UI();
+		
+		var btProximo = document.getElementById('proximo');
+		btProximo.addEventListener('click',function(){ui.proximoPasso.call(ui);},false);
+		var btIniciar = document.getElementById('iniciar');
+		btIniciar.addEventListener('click',function(){ui.iniciar.call(ui);},false);
+		
+		ui.carregar();
+	
+	
+	</script>
+	<script type="text/javascript" id="script_estado_inicial"></script>
+	<script type="text/javascript" id="script_celula"></script>
+
+
+</body>
+</html>
+
+
